@@ -2,6 +2,8 @@ import { Route, Routes } from "react-router-dom"
 import NotFound from "./NotFound"
 import Home from "../pages/Home"
 import Canvas from "../pages/Canvas"
+import SignIn from "../pages/Signin"
+import Signup from "../pages/Signup"
 
 
 const MainRoute = () => {
@@ -9,6 +11,8 @@ const MainRoute = () => {
     <Routes>
         <Route path="/" element={<Home/>}></Route>
         <Route path="/canvas" element={<Canvas/>}/>
+        <Route path="/signin" element={<SignIn/>}/>
+        <Route path="/signup" element={<Signup/>}/>
         <Route path="*" element={<NotFound/>}></Route>
     </Routes>
   )
