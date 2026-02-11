@@ -4,6 +4,8 @@ import Home from "../pages/Home"
 import Canvas from "../pages/Canvas"
 import SignIn from "../pages/Signin"
 import Signup from "../pages/Signup"
+import CanvasDashboard from "../pages/CanvasDashboard"
+import GeneratePPT from "../pages/GeneratePPT"
 
 
 const MainRoute = () => {
@@ -13,6 +15,8 @@ const MainRoute = () => {
         <Route path="/canvas" element={<Canvas/>}/>
         <Route path="/signin" element={<SignIn/>}/>
         <Route path="/signup" element={<Signup/>}/>
+        <Route path="/dashboard" element={<CanvasDashboard/>}/>
+        <Route path="/genppt" element={<GeneratePPT/>}/>
         <Route path="*" element={<NotFound/>}></Route>
     </Routes>
   )
