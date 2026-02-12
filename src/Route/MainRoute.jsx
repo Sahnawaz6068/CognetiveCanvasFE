@@ -1,11 +1,12 @@
 import { Route, Routes } from "react-router-dom"
 import NotFound from "./NotFound"
 import Home from "../pages/Home"
-import Canvas from "../pages/Canvas"
 import SignIn from "../pages/Signin"
 import Signup from "../pages/Signup"
 import CanvasDashboard from "../pages/CanvasDashboard"
 import GeneratePPT from "../pages/GeneratePPT"
+import Canvas from "../pages/CanvasPage"
+
 
 
 const MainRoute = () => {
