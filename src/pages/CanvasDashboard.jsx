@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { Plus, Search } from "lucide-react";
+import { LayoutGrid, Plus, Search } from "lucide-react";
 import CanvasCard from "../Components/CanvasCard";
+import { useNavigate } from "react-router-dom";
 
 export default function CanvasDashboard() {
   const [ppts, setPpts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("ALL"); // ALL | AI_PPT
+  const [filter, setFilter] = useState("ALL");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPPTs = async () => {
@@ -57,13 +59,24 @@ export default function CanvasDashboard() {
             </p>
           </div>
 
-          <button
-            className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-md
+          <div className="flex gap-6">
+            <button
+              onClick={() => navigate("/canvas")}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-md
+              border border-white/10 text-sm text-zinc-300
+              hover:bg-white/5 transition"
+            >
+              <LayoutGrid size={16} />
+              Canvas
+            </button>
+            <button
+              className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-md
             font-medium hover:bg-zinc-200 transition"
-          >
-            <Plus size={18} />
-            New Canvas
-          </button>
+            >
+              <Plus size={18} />
+              New Canvas
+            </button>
+          </div>
         </div>
 
         <div className="relative max-w-md mb-8">
@@ -113,12 +126,17 @@ export default function CanvasDashboard() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredPpts.map((ppt) => (
-            <CanvasCard
+            <div
               key={ppt._id}
-              title={ppt.topic}
-              description={`Status: ${ppt.status}`}
-              tags={["AI PPT"]}
-            />
+              onClick={() => navigate(`/ppt/${ppt._id}`)}
+              className="cursor-pointer"
+            >
+              <CanvasCard
+                title={ppt.topic}
+                description={`Status: ${ppt.status}`}
+                tags={["AI PPT"]}
+              />
+            </div>
           ))}
         </div>
 

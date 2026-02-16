@@ -6,6 +6,7 @@ import Signup from "../pages/Signup"
 import CanvasDashboard from "../pages/CanvasDashboard"
 import GeneratePPT from "../pages/GeneratePPT"
 import Canvas from "../pages/CanvasPage"
+import ViewPPT from "../pages/ViewPPT"
 
 
 
@@ -18,6 +19,7 @@ const MainRoute = () => {
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/dashboard" element={<CanvasDashboard/>}/>
         <Route path="/genppt" element={<GeneratePPT/>}/>
+        <Route path="/ppt/:id" element={<ViewPPT />} />
         <Route path="*" element={<NotFound/>}></Route>
     </Routes>
   )
