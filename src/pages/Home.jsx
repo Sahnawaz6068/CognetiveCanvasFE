@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import {
   Users,
   ShieldCheck,
@@ -6,8 +7,10 @@ import {
   History,
   ArrowRight,
 } from "lucide-react";
+import Canvas from "./CanvasPage";
 
 export default function Home() {
+  const navigate = useNavigate();
   return (
     <div className="bg-black text-white">
       {/* NAVBAR */}
@@ -68,17 +71,16 @@ export default function Home() {
           </div>
 
           {/* Visual placeholder (grid principle) */}
-          <div className="hidden lg:block">
-            <div className="aspect-[4/3] rounded-xl border border-white/10 bg-gradient-to-br from-zinc-900 to-black" />
+          <div className="hidden lg:block" onClick={()=>navigate("/canvas")}>
+            <div className="aspect-[4/3] rounded-xl border border-white/10 overflow-hidden">
+              <Canvas />
+            </div>
           </div>
         </div>
       </section>
 
       {/* FEATURES */}
-      <section
-        id="features"
-        className="border-t border-white/5 bg-zinc-950"
-      >
+      <section id="features" className="border-t border-white/5 bg-zinc-950">
         <div className="max-w-7xl mx-auto px-6 py-28">
           <div className="max-w-2xl mb-20">
             <h3 className="text-3xl font-semibold tracking-tight">

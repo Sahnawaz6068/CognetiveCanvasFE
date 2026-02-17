@@ -1,8 +1,58 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Signup() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!form.username || !form.email || !form.password) {
+      toast.error("All fields are required");
+      return;
+    }
+
+    let toastId;
+
+    try {
+      setLoading(true);
+      toastId = toast.loading("Creating account...");
+
+      const res = await fetch("http://localhost:3000/api/v1/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Signup failed");
+      }
+
+      toast.success("Account created successfully", { id: toastId });
+      navigate("/signin");
+    } catch (err) {
+      toast.error(err.message || "Something went wrong", { id: toastId });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center px-6">
       <motion.div
@@ -14,72 +64,49 @@ export default function Signup() {
         <h1 className="text-3xl font-semibold tracking-tight">
           Create your account
         </h1>
-        <p className="mt-2 text-sm text-zinc-400">
-          Start building with Cognitive Canvas
-        </p>
 
-        <form className="mt-8 space-y-5">
-          <div>
-            <label className="block text-xs uppercase tracking-wide text-zinc-500 mb-2">
-              Name
-            </label>
-            <input
-              type="text"
-              placeholder="Your name"
-              className="w-full bg-black border border-white/10 rounded-md px-4 py-3 text-sm
-              placeholder:text-zinc-600 focus:border-white focus:ring-1 focus:ring-white/30 outline-none transition"
-            />
-          </div>
+        <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+          <input
+            name="username"
+            value={form.username}
+            onChange={handleChange}
+            placeholder="Your name"
+            className="w-full bg-black border border-white/10 rounded-md px-4 py-3"
+          />
 
-          <div>
-            <label className="block text-xs uppercase tracking-wide text-zinc-500 mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              placeholder="you@example.com"
-              className="w-full bg-black border border-white/10 rounded-md px-4 py-3 text-sm
-              placeholder:text-zinc-600 focus:border-white focus:ring-1 focus:ring-white/30 outline-none transition"
-            />
-          </div>
+          <input
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            type="email"
+            placeholder="you@example.com"
+            className="w-full bg-black border border-white/10 rounded-md px-4 py-3"
+          />
 
-          <div>
-            <label className="block text-xs uppercase tracking-wide text-zinc-500 mb-2">
-              Password
-            </label>
-            <input
-              type="password"
-              placeholder="Create a strong password"
-              className="w-full bg-black border border-white/10 rounded-md px-4 py-3 text-sm
-              placeholder:text-zinc-600 focus:border-white focus:ring-1 focus:ring-white/30 outline-none transition"
-            />
-          </div>
+          <input
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            type="password"
+            placeholder="Create a strong password"
+            className="w-full bg-black border border-white/10 rounded-md px-4 py-3"
+          />
 
           <button
             type="submit"
-            className="w-full bg-white text-black py-3 rounded-md font-medium
-            hover:bg-zinc-200 active:scale-[0.99] transition"
+            disabled={loading}
+            className="w-full bg-white text-black py-3 rounded-md font-medium disabled:opacity-60"
           >
-            Create Account
+            {loading ? "Creating..." : "Create Account"}
           </button>
         </form>
 
-        <div className="my-8 flex items-center gap-4">
-          <div className="h-px flex-1 bg-white/10" />
-          <span className="text-xs text-zinc-500">OR</span>
-          <div className="h-px flex-1 bg-white/10" />
-        </div>
-
-        <button
-          className="w-full border border-white/10 py-3 rounded-md text-sm
-          text-zinc-300 hover:bg-white/5 transition"
-        >
-          Continue with Google
-        </button>
-
         <p className="mt-6 text-sm text-zinc-400 text-center">
           Already have an account?{" "}
-          <span onClick={()=>navigate("/signin")} className="text-white hover:underline cursor-pointer">
+          <span
+            onClick={() => navigate("/signin")}
+            className="text-white hover:underline cursor-pointer"
+          >
             Sign in
           </span>
         </p>
