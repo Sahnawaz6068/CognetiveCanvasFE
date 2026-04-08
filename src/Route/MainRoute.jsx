@@ -7,6 +7,7 @@ import CanvasDashboard from "../pages/CanvasDashboard"
 import GeneratePPT from "../pages/GeneratePPT"
 import Canvas from "../pages/CanvasPage"
 import ViewPPT from "../pages/ViewPPT"
+import RealTime from "../pages/RealTime"
 
 
 
@@ -20,6 +21,7 @@ const MainRoute = () => {
         <Route path="/dashboard" element={<CanvasDashboard/>}/>
         <Route path="/genppt" element={<GeneratePPT/>}/>
         <Route path="/ppt/:id" element={<ViewPPT />} />
+        <Route path="/real-time" element={<RealTime/>} />
         <Route path="*" element={<NotFound/>}></Route>
     </Routes>
   )
