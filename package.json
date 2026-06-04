@@ -10,9 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/genai": "^1.52.0",
     "@google/generative-ai": "^0.24.1",
     "@tailwindcss/vite": "^4.1.18",
-    "@tldraw/sync": "^4.5.7",
+    "@tldraw/sync": "^5.0.1",
     "framer-motion": "^12.34.0",
     "lucide-react": "^0.563.0",
     "pptxgenjs": "^4.0.1",
@@ -21,7 +22,7 @@
     "react-hot-toast": "^2.6.0",
     "react-router-dom": "^7.13.0",
     "tailwindcss": "^4.1.18",
-    "tldraw": "^4.3.1"
+    "tldraw": "^5.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
