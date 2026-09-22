@@ -8,7 +8,7 @@ import CanvasDashboard from "../pages/CanvasDashboard";
 import GeneratePPT from "../pages/GeneratePPT";
 import Canvas from "../pages/CanvasPage";
 import ViewPPT from "../pages/ViewPPT";
-import RealTime from "../pages/RealTime";
+// import RealTime from "../pages/RealTime";
 import Collab from "../pages/Collab";
 
 const ProtectedRoute = ({ children }) => {
@@ -59,14 +59,14 @@ const MainRoute = () => {
         }
       />
 
-      <Route
+      {/* <Route
         path="/real-time"
         element={
           <ProtectedRoute>
             <RealTime />
           </ProtectedRoute>
         }
-      />
+      /> */}
 
       <Route
         path="/collab/:roomId"
